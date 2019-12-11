@@ -12,9 +12,8 @@ class DockingStation
     @bike_rack.empty? ? raise('No bikes in bike rack') : @bike_rack.pop
   end
 
-  def dock_bike(bike)
-    @bike_rack.empty? ? @bike_rack << bike : raise('Bike rack is full!')
+  def dock(bike)
+    @bike_rack.length < 20 ? @bike_rack << bike : raise('Bike rack is full!')
   end
-
 
 end
