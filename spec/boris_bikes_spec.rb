@@ -55,6 +55,6 @@ describe DockingStation do
     docking_station = DockingStation.new(cap)
     expect {(cap + 1).times {docking_station.dock(Bike.new)}}.to raise_error('Bike rack is full!')
   end
-  
+   
 
 end
