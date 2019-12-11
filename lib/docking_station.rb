@@ -1,9 +1,10 @@
 require_relative 'bike'
 
 class DockingStation
-
+  DEFAULT_CAPACITY = 20
   def initialize
     @bike_rack = []
+
   end
 
   attr_reader :bike_rack
@@ -13,13 +14,13 @@ class DockingStation
   end
 
   def dock(bike)
-    full? ? raise('Bike rack is full!') : @bike_rack << bike 
+    full? ? raise('Bike rack is full!') : @bike_rack << bike
   end
 
   private
 
   def full?
-    @bike_rack.length == 20 ? true : false
+    @bike_rack.length == DEFAULT_CAPACITY ? true : false
   end
 
 
