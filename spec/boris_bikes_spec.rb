@@ -57,4 +57,18 @@ describe DockingStation do
   end
    
 
+  it 'user can report bike as broken when docking bike' do
+    bike = Bike.new
+    expect(bike.working?).to eq true #checking initial bike working status
+    broken_status = false 
+    subject.dock(bike, broken_status) #puts bike to bike_rack, changing working status
+    expect(subject.bike_rack[0].working?).to eq false #checking first (only) bike inside bike_rack
+  end
+
+  it 'raise error if releasing bike and no working bikes in rack' do
+    bike = Bike.new
+    broken_status = false 
+    subject.dock(bike, broken_status)
+    expect {subject.release_bike}.to raise_error('No working bikes in rack')
+  end
 end
