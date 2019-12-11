@@ -3,6 +3,8 @@ require 'bike'
 
 describe DockingStation do
 
+  
+
   it { is_expected.to respond_to :release_bike }
 
   it 'releases working bikes' do
@@ -31,7 +33,7 @@ describe DockingStation do
   end
 
 
-  it 'raise error if docking a bike to full docking station' do
+  it 'raise error if docking a bike to full docking station with a DEFAULT_CAPACITY' do
     expect {(DockingStation::DEFAULT_CAPACITY + 1).times {subject.dock(Bike.new)}}.to raise_error('Bike rack is full!')
   end
 
@@ -39,5 +41,20 @@ describe DockingStation do
     DockingStation::DEFAULT_CAPACITY.times {subject.dock(Bike.new)}
     expect(subject.bike_rack.length).to eq DockingStation::DEFAULT_CAPACITY
   end
+
+  it 'accepts capacity argument' do
+    expect(DockingStation.new(25).capacity).to eq 25
+  end
+
+  it 'sets capacity to DEFAULT_CAPACITY if no argument is passed' do
+    expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
+  it 'raise error if docking a bike to full docking station' do
+    cap = 5
+    docking_station = DockingStation.new(cap)
+    expect {(cap + 1).times {docking_station.dock(Bike.new)}}.to raise_error('Bike rack is full!')
+  end
+  
 
 end
