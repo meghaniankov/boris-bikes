@@ -13,7 +13,14 @@ class DockingStation
   end
 
   def dock(bike)
-    @bike_rack.length < 20 ? @bike_rack << bike : raise('Bike rack is full!')
+    full? ? raise('Bike rack is full!') : @bike_rack << bike 
   end
+
+  private
+
+  def full?
+    @bike_rack.length == 20 ? true : false
+  end
+
 
 end
