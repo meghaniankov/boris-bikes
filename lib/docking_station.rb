@@ -9,17 +9,11 @@ class DockingStation
   attr_reader :bike_rack
 
   def release_bike
-    if @bike_rack.empty?
-      raise 'No bikes in bike rack'
-    else
-      @bike_rack.pop
-    end
+    @bike_rack.empty? ? raise('No bikes in bike rack') : @bike_rack.pop
   end
 
-
-
   def dock_bike(bike)
-    @bike_rack << bike
+    @bike_rack.empty? ? @bike_rack << bike : raise('Bike rack is full!')
   end
 
 
