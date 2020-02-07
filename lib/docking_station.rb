@@ -14,20 +14,15 @@ class DockingStation
     if @bike_rack.empty?
       raise('No bikes in bike rack')
     else
-      @bike_rack.each { |bike| return bike if bike.working? } # return breaks method if working bike is found
-      raise('No working bikes in rack') #raise will be called if each loop does not break with Return
+      @bike_rack.each { |bike| return bike if bike.working? }
+      raise('No working bikes in rack')
     end
   end
 
   def dock(bike, is_functional = true)
-    if full?
-      raise('Bike rack is full!')
-    end
+    raise('Bike rack is full!') if full?
+    bike.broken if is_functional == false
 
-    if is_functional == false
-      bike.broken
-    end
-    
     @bike_rack << bike
   end
 
